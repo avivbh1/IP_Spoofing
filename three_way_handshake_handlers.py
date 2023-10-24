@@ -8,7 +8,7 @@ def handle_syn(packet):
         # segment
 
         # Create and send a SYN-ACK response
-        syn_ack_segment = TCP(sport=12345, dport=packet[TCP].sport, flags="SA", seq=1, ack=packet[TCP].seq + 1)
+        syn_ack_segment = TCP(sport=packet[TCP].dport, dport=packet[TCP].sport, flags="SA", seq=1, ack=packet[TCP].seq + 1)
         response = IP(src=packet[IP].dst, dst=packet[IP].src) / syn_ack_segment
         send(response)
 
@@ -18,7 +18,7 @@ def handle_syn_ack(packet):
         # segment
 
         # Create and send a SYN-ACK response
-        ack_segment = TCP(sport=12345, dport=packet[TCP].sport, flags="A", seq=1, ack=packet[TCP].seq + 1)
+        ack_segment = TCP(sport=packet[TCP].dport, dport=packet[TCP].sport, flags="A", ack=packet[TCP].seq + 1)
         response = IP(src=packet[IP].dst, dst=packet[IP].src) / ack_segment
         send(response)
 
