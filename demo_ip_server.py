@@ -26,4 +26,5 @@ def handle_three_way_handshake(packet):
 
 
 def run_demo_server(port):
-    sniff(filter=f"tcp and port {port}", prn=handle_three_way_handshake())
+    sniff(filter=f"tcp and port {port}", prn=handle_three_way_handshake)
+    print(f"demo server runs on PORT f{port}")
